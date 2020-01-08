@@ -41,13 +41,52 @@ module or directly via
 
 ### Name of the extension where the general configuration file lives
 
-The following option has to be set within the TYPO3 extension configuration:
+The following option has to be set within the TYPO3 extension
+configuration:
 
 ```
-configurationProviderExtension = name_of_the_extension_where_you_place_yaml_config_file
+configurationProviderExtension = my_nice_site_extension
 ```
 
-> *So if you place the configuration file in `EXT:my_nice_site/Configuration/ImageManipulation/CropVariants.yaml` you have to set the value to `my_nice_site`.*
+> *So if you place the configuration file in
+> `EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`
+> you have to set the value to `my_nice_site`.*
+
+
+### Example of using your own CropVariants.yaml file
+
+Just clone the file
+`EXT:cropvariantsbuilder/Configuration/ImageManipulation/CropVariants.yaml`
+to
+`EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`
+and modify it however you want. Whith that approach, you have no
+dependencies on the default CropVariants.yaml of EXT:cropvariantsbuilder
+
+### Example of using your own CropVariants.yaml file while using the `\TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader->load()` imports feature
+
+> The following example represents the content of the file
+> `EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`.
+
+```
+imageManipulation:
+  cropVariants:
+    defaults:
+      aspectRatios:
+        "1.91:1":
+          title: "This is the new title for an existing aspectRatio within EXT:cropvariantsbuilder"
+        "123:321":
+          title: "Completely new introduced aspect ratio"
+          value: 123 / 321
+
+imports:
+  -
+    resource: 'EXT:cropvariantsbuilder/Configuration/ImageManipulation/CropVariants.yaml'
+
+```
+
+You can rely on the default CropVariants.yaml of
+`EXT:cropvariantsbuilder` while modifying it to meet the demands of your
+specific project with the example shown above.
 
 ---
 
@@ -65,7 +104,6 @@ current development state.
 Cheers to all TYPO3 enthusiasts out there!
 
 ---
-
 
 ## Created by
 

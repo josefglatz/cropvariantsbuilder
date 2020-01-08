@@ -1,0 +1,39 @@
+<?php
+declare(strict_types = 1);
+
+namespace JosefGlatz\CropVariantsBuilder\Domain\Model\Dto;
+
+use JosefGlatz\CropVariantsBuilder\Service\VersionService;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+class EmConfiguration implements SingletonInterface
+{
+    public function __construct()
+    {
+        $settings = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cropvariantsbuilder']);
+        if (VersionService::isVersion9() || VersionService::isVersion10()) {
+            $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('cropvariantsbuilder');
+        }
+        foreach ($settings as $key => $value) {
+            if (property_exists(__CLASS__, $key)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
+    /**
+     * @var string;
+     */
+    protected $configurationProviderExtension = '';
+
+    /**
+     * @return string
+     */
+    public function getConfigurationProviderExtension(): string
+    {
+        return $this->configurationProviderExtension;
+    }
+
+}
