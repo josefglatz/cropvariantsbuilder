@@ -14,8 +14,7 @@
 		"typo3/cms-core": "^8.7 || ^9.5"
 	},
 	"replace": {
-		"typo3-ter/cropvariantsbuilder": "self.version",
-		"cropvariantsbuilder": "self.version"
+		"typo3-ter/cropvariantsbuilder": "self.version"
 	},
 	"autoload": {
 		"psr-4": {
