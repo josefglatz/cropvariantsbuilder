@@ -1,0 +1,30 @@
+{
+	"name": "josefglatz/cropvariantsbuilder",
+	"type": "typo3-cms-extension",
+	"description": "Simplify writing cropVariants for TYPO3 Integrators/Developers",
+	"keywords": [
+		"TYPO3",
+		"extension",
+		"cropvariant",
+		"cropvariants",
+		"imagemanipulation"
+	],
+	"license": "GPL-2.0-only",
+	"require": {
+		"typo3/cms-core": "^8.7 || ^9.5"
+	},
+	"replace": {
+		"typo3-ter/cropvariantsbuilder": "self.version",
+		"cropvariantsbuilder": "self.version"
+	},
+	"autoload": {
+		"psr-4": {
+			"JosefGlatz\\CropVariantsBuilder\\": "Classes/"
+		}
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "cropvariantsbuilder"
+		}
+	}
+}
