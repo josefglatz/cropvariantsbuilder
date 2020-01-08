@@ -4,7 +4,7 @@ TYPO3 extension to simplify writing cropVariants for TYPO3
 Integrators/Developers
 
 > The release of the functionality of my crop variants builder (for
-> TYPO3 8.7 & 9.5) into its own extension was supported by supseven.
+> TYPO3 8.7 & 9.5) into its own extension was supported by [supseven](https://www.supseven.at/) .
 > **Thanks for the opportunity!**
 
 ## ##
