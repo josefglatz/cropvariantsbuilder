@@ -9,12 +9,32 @@
 
 ## About
 
+This extensions centralizes the configuration of
+
+* default aspectRatios,
+* aspectRatios used within the TYPO3 instance,
+* coverAreas used within the TYPO3 instance,
+* cropAreas used within the TYPO3 instance,
+* focusAreas used within the TYPO3 instance.
+
+This extension makes it easy to configure cropVariants within TCA
+(`EXT:your_ext/Configuration/TCA/**/*.php`) modifications.
+
+> ***The extension relies 100% on the TYPO3 core functionality*** and can be seen als a on-top-time-saver for TYPO3 integrators.
+
 ### Past
 
 The initial public version was part of
 `https://github.com/josefglatz/TYPO3-Distribution`. The demands grew in
 2019 and therefore I came up with a new idea how to support also the
 TYPO3 site configuration which was introduced in TYPO3 9.5 LTS.
+
+### Present
+
+To make `https://github.com/josefglatz/TYPO3-Distribution` more
+versatile and clearer the interested crowd suggested to remove this
+feature into an own extension. At the time of extracting the feature,
+the extension officially supports TYPO3 8.7 LTS and 9.5 LTS.
 
 ### Future
 
@@ -60,7 +80,8 @@ Just clone the file
 to
 `EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`
 and modify it however you want. Whith that approach, you have no
-dependencies on the default CropVariants.yaml of EXT:cropvariantsbuilder
+dependencies on the default CropVariants.yaml of
+`EXT:cropvariantsbuilder`.
 
 ### Example of using your own CropVariants.yaml file while using the `\TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader->load()` imports feature
 
