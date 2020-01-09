@@ -18,23 +18,32 @@ This extensions centralizes the configuration of
 * focusAreas used within the TYPO3 instance.
 
 This extension makes it easy to configure cropVariants within TCA
-(`EXT:your_ext/Configuration/TCA/**/*.php`) modifications.
+(`EXT:your_ext/Configuration/TCA/**/*.php`) modifications in your "site
+package" extension.
 
-> ***The extension relies 100% on the TYPO3 core functionality*** and can be seen als a on-top-time-saver for TYPO3 integrators.
+> ***The extension relies 100% on the TYPO3 core functionality*** and
+> can be seen as an on-top-time-saver for TYPO3 integrators.
 
 ### Past
 
 The initial public version was part of
 `https://github.com/josefglatz/TYPO3-Distribution`. The demands grew in
-2019 and therefore I came up with a new idea how to support also the
-TYPO3 site configuration which was introduced in TYPO3 9.5 LTS.
+2019 and therefore I came up with a new idea to support also the TYPO3
+site configuration which was introduced in TYPO3 9.5 LTS.
 
 ### Present
 
-To make `https://github.com/josefglatz/TYPO3-Distribution` more
-versatile and clearer the interested crowd suggested to remove this
-feature into an own extension. At the time of extracting the feature,
-the extension officially supports TYPO3 8.7 LTS and 9.5 LTS.
+This extension doesn't support the TYPO3 site configuration. With that
+known fact, it's not possible to distinguish between multiple sites in a
+multitree environment.
+
+Beside that fact, I want to make
+`https://github.com/josefglatz/TYPO3-Distribution` more versatile and
+clearer. The interested crowd suggested me to remove the
+cropvariantsbuilder feature into an own extension. At the time of
+extracting the feature into this extension, the extension officially
+supports TYPO3 8.7 LTS and 9.5 LTS. So, here it is, the standalone
+cropvariantsbuilder formerly known from Josef Glatz's EXT:theme.
 
 ### Future
 
@@ -43,7 +52,17 @@ direct successor to which you can update and migrate automatically (from
 my current perspective). I will link the new extension here when it's
 publicly available.
 
-## Installation and Configuration
+At the time of writing about the future my plan is to re-adding the
+functionality completely via the TYPO3 site configuration and the
+FormDataProvider. With that in mind, it's possible to make site specific
+configurations. Even the configuration can be done completely via a YAML
+file beside your existing YAML file of one configured site.
+
+If it makes really sense, I probably add also the functionality of
+`EXT:cropvariantsbuilder` to make global TCA modifications possible (not
+yet specified if you have to write YAML or the known PHP syntax).
+
+## Installation
 
 ### Installation using Composer
 
@@ -72,6 +91,18 @@ configurationProviderExtension = my_nice_site_extension
 > `EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`
 > you have to set the value to `my_nice_site`.*
 
+The following example shows the resulting PHP configuration part:
+
+```php
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cropvariantsbuilder'] = serialize([
+    'configurationProviderExtension' => 'my_nice_site'
+]);
+
+// TYPO3 >= 9.5 LTS:
+$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['cropvariantsbuilder'] = [
+    'configurationProviderExtension' => 'my_nice_site'
+];
+```
 
 ### Example of using your own CropVariants.yaml file
 
@@ -99,6 +130,14 @@ imageManipulation:
           title: "Completely new introduced aspect ratio"
           value: 123 / 321
 
+      defaultCropVariantsConfiguration:
+        default:
+          aspectRatios:
+            - "3:2"
+            - "2:3"
+            - "123:321"
+            - "NaN"
+
 imports:
   -
     resource: 'EXT:cropvariantsbuilder/Configuration/ImageManipulation/CropVariants.yaml'
@@ -107,7 +146,10 @@ imports:
 
 You can rely on the default CropVariants.yaml of
 `EXT:cropvariantsbuilder` while modifying it to meet the demands of your
-specific project with the example shown above.
+specific project with the example shown above. And of course, you can
+import any other YAML file. You don't have to rely on the default
+CropVariants.yaml if the resulting YAML file includes a configuration
+for every necessary part.
 
 ---
 
@@ -122,7 +164,7 @@ current development state.
 
 ---
 
-Cheers to all TYPO3 enthusiasts out there!
+*Cheers to all TYPO3 enthusiasts out there!*
 
 ---
 

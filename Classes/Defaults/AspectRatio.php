@@ -1,9 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace JosefGlatz\CropVariantsBuilder\Backend\CropVariants\Defaults;
+namespace JosefGlatz\CropVariantsBuilder\Defaults;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use UnexpectedValueException;
 
 class AspectRatio
 {
@@ -26,7 +25,7 @@ class AspectRatio
                     'value' => self::ratioCalculations((string)$new['value'])
                 ];
             } else {
-                throw new UnexpectedValueException(
+                throw new \UnexpectedValueException(
                     'Given aspectRatio "' . $key . '" not found."',
                     1520426705
                 );
@@ -57,6 +56,6 @@ class AspectRatio
         if (\count($value) === 2) {
             return $value[0] / $value[1];
         }
-        throw new UnexpectedValueException('AspectRatio value not valid! Please provide a division or a float number.', 1524838980);
+        throw new \UnexpectedValueException('AspectRatio value not valid! Please provide a division or a float number.', 1524838980);
     }
 }

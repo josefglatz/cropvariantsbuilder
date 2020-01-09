@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace JosefGlatz\CropVariantsBuilder\Backend\CropVariants\Defaults;
+namespace JosefGlatz\CropVariantsBuilder\Defaults;
 
 use JosefGlatz\CropVariantsBuilder\Domain\Model\Dto\EmConfiguration;
 use JosefGlatz\CropVariantsBuilder\Service\VersionService;
@@ -28,12 +28,11 @@ class Configuration
 
 
         // Get extension name and path from where the custom CropVariants.yaml file should be loaded
-        $configurationProviderExtension = GeneralUtility::makeInstance(EmConfiguration::class)
-            ->getConfigurationProviderExtension();
-        $configFilePath = 'EXT:' . $configurationProviderExtension . self::CONFIGFILE;
+        $configFilePath = self::getActiveConfigurationFilePath();
 
         // Set fallback if custom CropVariants.yaml file could not be processed
         $configuration = self::loadYamlFile('EXT:cropvariantsbuilder' . self::CONFIGFILE);
+
 
         // Try to load the custom CropVariants.yaml and log errors just in case
         try {
@@ -44,7 +43,6 @@ class Configuration
         } catch (\RuntimeException $e) {
             $logger->error(sprintf('The CONFIGFILE "%s" could not be found.', $configFilePath), [$e->getMessage()]);
         }
-
         $defaults = $configuration['imageManipulation']['cropVariants']['defaults'];
         // Check if configuration array path exists
         if (!\is_array($defaults)) {
@@ -87,5 +85,13 @@ class Configuration
         } else {
             return $fileLoader->load($path, YamlFileLoader::PROCESS_IMPORTS);
         }
+    }
+
+    public static function getActiveConfigurationFilePath(): string
+    {
+        $configurationProviderExtension = GeneralUtility::makeInstance(EmConfiguration::class)
+            ->getConfigurationProviderExtension();
+
+        return 'EXT:' . $configurationProviderExtension . self::CONFIGFILE;
     }
 }

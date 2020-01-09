@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace JosefGlatz\CropVariantsBuilder\Backend;
+namespace JosefGlatz\CropVariantsBuilder;
 
-use JosefGlatz\CropVariantsBuilder\Backend\CropVariants\Defaults\CropArea;
+use JosefGlatz\CropVariantsBuilder\Defaults\CropArea;
 use JosefGlatz\CropVariantsBuilder\Utility\ArrayTool;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -142,7 +142,7 @@ class CropVariant
      * @param array $coverAreas
      * @return $this
      */
-    public function addCoverAreas(array $coverAreas)
+    public function addCoverAreas(array $coverAreas): self
     {
         foreach ($coverAreas as $coverArea) {
             $this->coverAreas[] = $coverArea;
@@ -158,7 +158,7 @@ class CropVariant
      * @return $this
      * @throws \RuntimeException
      */
-    public function addAllowedAspectRatios(array $ratios)
+    public function addAllowedAspectRatios(array $ratios): self
     {
         if (!empty($ratios)) {
             foreach ($ratios as $key => $ratio) {
@@ -185,7 +185,7 @@ class CropVariant
      * @return $this
      * @throws \UnexpectedValueException
      */
-    public function removeAllowedAspectRatio(string $ratio)
+    public function removeAllowedAspectRatio(string $ratio): self
     {
         if (\array_key_exists(trim($ratio), $this->allowedAspectRatios)) {
             unset($this->allowedAspectRatios[$ratio]);
@@ -207,7 +207,7 @@ class CropVariant
      * @return $this
      * @throws \UnexpectedValueException
      */
-    public function setSelectedRatio(string $ratio)
+    public function setSelectedRatio(string $ratio): self
     {
         if (\array_key_exists(trim($ratio), $this->allowedAspectRatios)) {
             $this->selectedRatio = $ratio;

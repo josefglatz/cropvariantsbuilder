@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace JosefGlatz\CropVariantsBuilder\Backend\CropVariants\Defaults;
+namespace JosefGlatz\CropVariantsBuilder\Defaults;
 
 class CropArea
 {

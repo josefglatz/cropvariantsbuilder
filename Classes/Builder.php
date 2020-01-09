@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace JosefGlatz\CropVariantsBuilder\Backend;
+namespace JosefGlatz\CropVariantsBuilder;
 
-use JosefGlatz\CropVariantsBuilder\Backend\CropVariants\Defaults\CropVariant;
+use JosefGlatz\CropVariantsBuilder\Defaults\CropVariant;
 use JosefGlatz\CropVariantsBuilder\Utility\ArrayTool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -121,7 +121,7 @@ class Builder
      * @return $this
      * @throws \UnexpectedValueException
      */
-    public function disableDefaultCropVariants()
+    public function disableDefaultCropVariants(): self
     {
         $defaultCropVariants = CropVariant::getDefaultCropVariantsNames();
         $cropVariants = $this->cropVariants;
