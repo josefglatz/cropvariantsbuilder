@@ -14,6 +14,7 @@ builder:
    Custom cropVariants configuration for a specific field of a specific
    table
 3. [Example 3: Set custom cropVariants for `tx_news_domain_model_news.fal_media`](#example-3-set-custom-cropvariants-for-tx_news_domain_model_newsfal_media)
+4. [Example 4: Set custom cropVariants for `tt_content.image` for CType `tx_my_nice_site_extension_custom_ce1`](#example-4-set-custom-cropvariants-for-tt_contentimage-for-ctype-tx_my_nice_site_extension_custom_ce1)
 
 
 **The CropVariants Builder uses centralized configured
@@ -339,9 +340,9 @@ call_user_func(
 
 A common usecase: You want to configure cropVariants for the `fal_media`
 column of `EXT:news`. The default cropVariant was removed and two new
-cropVariants was added.
-The first is called `teaser` with one aspectRatio 3:2. The other one
-called `teaser-big-md` with one aspectRatio 16:9.
+cropVariants was added. The first is called `teaser` with one
+aspectRatio 3:2. The other one called `teaser-big-md` with one
+aspectRatio 16:9.
 
 The two different cropVariants are used for a news list design, where
 not every news item has the same aspect ratio.
@@ -374,5 +375,54 @@ call_user_func(
     },
     'my_nice_site_extension',
     'tx_news_domain_model_news'
+);
+```
+
+---
+
+## Example 4: Set custom cropVariants for `tt_content.image` for CType `tx_my_nice_site_extension_custom_ce1`
+
+`EXT:my_nice_site_extension/Configuration/TCA/Overrides/tt_content_custom_ce1.php`
+
+A common usecase: You want a custom cropVariants configuration for a
+content element (CType)
+`tx_my_nice_site_extension_custom_ce1` for the column
+`tt_content.image`.
+
+```php
+<?php
+defined('TYPO3_MODE') || die('Access denied.');
+
+call_user_func(
+    static function ($extKey, $table, $type) {
+
+        /**
+         * Set cropVariants configuration with EXT:cropvariantsbuilder
+         */
+        \JosefGlatz\CropVariantsBuilder\Builder::getInstance($table, 'image', $type)
+            ->disableDefaultCropVariants()
+            ->addCropVariant(
+                \JosefGlatz\CropVariantsBuilder\CropVariant::create('xs')
+                    ->addAllowedAspectRatios(\JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio::get(['1:1']))
+                    ->setCropArea(\JosefGlatz\CropVariantsBuilder\Defaults\CropArea::get())
+                    ->get()
+            )
+            ->addCropVariant(
+                \JosefGlatz\CropVariantsBuilder\CropVariant::create('md')
+                    ->addAllowedAspectRatios(\JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio::get(['3:2']))
+                    ->setCropArea(\JosefGlatz\CropVariantsBuilder\Defaults\CropArea::get())
+                    ->get()
+            )
+            ->addCropVariant(
+                \JosefGlatz\CropVariantsBuilder\CropVariant::create('lg')
+                    ->addAllowedAspectRatios(\JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio::get(['16:9']))
+                    ->setCropArea(\JosefGlatz\CropVariantsBuilder\Defaults\CropArea::get())
+                    ->get()
+            )
+            ->persistToTca();
+    },
+    'my_nice_site_extension',
+    'tt_content',
+    'tx_my_nice_site_extension_custom_ce1'
 );
 ```
