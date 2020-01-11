@@ -10,6 +10,9 @@
 ---
 
 1. [About](#about)
+   1. [Past](#past)
+   2. [Present](#present)
+   3. [Future](#future)
 2. [Installation](#installation)
    1. [Installation using Composer](#installation-using-composer)
    2. [Installation as extension from TYPO3 Extension Repository (TER)](#installation-as-extension-from-typo3-extension-repository-ter)
