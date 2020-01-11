@@ -13,9 +13,11 @@ builder:
 2. [Example 2: Set custom cropVariants for a specific field of a specific table (`pages.tx_my_nice_site_extension_nav_image`)](#example-2-set-custom-cropvariants-for-a-specific-field-of-a-specific-table-pagestx_my_nice_site_extension_nav_image):
    Custom cropVariants configuration for a specific field of a specific
    table
+3. [Example 3: Set custom cropVariants for `tx_news_domain_model_news.fal_media`](#example-3-set-custom-cropvariants-for-tx_news_domain_model_newsfal_media)
 
 
-**The CropVariants Builder uses centralized configured [defaults and presets](DefaultsAndPresets.md):**
+**The CropVariants Builder uses centralized configured
+[defaults and presets](DefaultsAndPresets.md):**
 
 1. [aspectRatio presets](DefaultsAndPresets.md#predefined-aspectratios)
 2. [coverArea presets](DefaultsAndPresets.md#predefined-coverareas)
@@ -27,7 +29,8 @@ builder:
 
 ## Example 1: Set a global default cropVariants configuration
 
-The code examples shown in Example 1 can be seen as the content of files in your own site package extension named `my_nice_site_extension`.
+The code examples shown in Example 1 can be seen as the content of files
+in your own site package extension named `my_nice_site_extension`.
 
 The "default" cropVariants configuration is set as a project default. 6
 allowed aspect ratios are configured in this example.
@@ -49,7 +52,7 @@ allowed aspect ratios are configured in this example.
 defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(
-    function ($extKey, $table) {
+    static function ($extKey, $table) {
         $languageFileBePrefix = 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_be.xlf:';
 
         $tca = [
@@ -129,7 +132,9 @@ imageManipulation:
             - "1:1"
             - "NaN"
 ```
-**If you want to use a custom aspectRatio for the defaults, you just have to configure it in the same YAML configuration file!**
+
+**If you want to use a custom aspectRatio for the defaults, you just
+have to configure it in the same YAML configuration file!**
 
 ---
 
@@ -272,7 +277,7 @@ call_user_func(
 defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(
-    function ($extKey, $table) {
+    static function ($extKey, $table) {
         $languageFileBePrefix = 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_BackendGeneral.xlf:';
 
         $additionalColumns = [
@@ -326,3 +331,48 @@ call_user_func(
 );
 ```
 
+---
+
+## Example 3: Set custom cropVariants for `tx_news_domain_model_news.fal_media`
+
+`EXT:my_nice_site_extension/Configuration/TCA/Overrides/tx_news_domain_model_news.php`
+
+A common usecase: You want to configure cropVariants for the `fal_media`
+column of `EXT:news`. The default cropVariant was removed and two new
+cropVariants was added.
+The first is called `teaser` with one aspectRatio 3:2. The other one
+called `teaser-big-md` with one aspectRatio 16:9.
+
+The two different cropVariants are used for a news list design, where
+not every news item has the same aspect ratio.
+
+```php
+<?php
+defined('TYPO3_MODE') || die('Access denied.');
+
+call_user_func(
+    static function ($extKey, $table) {
+
+        /**
+         * Set cropVariants configuration with EXT:cropvariantsbuilder
+         */
+        \JosefGlatz\CropVariantsBuilder\Builder::getInstance($table, 'fal_media')
+            ->disableDefaultCropVariants()
+            ->addCropVariant(
+                \JosefGlatz\CropVariantsBuilder\CropVariant::create('teaser')
+                    ->setCropArea(\JosefGlatz\CropVariantsBuilder\Defaults\CropArea::get())
+                    ->addAllowedAspectRatios(\JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio::get(['3:2']))
+                    ->get()
+            )
+            ->addCropVariant(
+                \JosefGlatz\CropVariantsBuilder\CropVariant::create('teaser-big-md')
+                    ->setCropArea(\JosefGlatz\CropVariantsBuilder\Defaults\CropArea::get())
+                    ->addAllowedAspectRatios(\JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio::get(['16:9']))
+                    ->get()
+            )
+            ->persistToTca();
+    },
+    'my_nice_site_extension',
+    'tx_news_domain_model_news'
+);
+```
