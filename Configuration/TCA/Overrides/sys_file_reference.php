@@ -7,8 +7,6 @@ use JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio;
 use JosefGlatz\CropVariantsBuilder\Defaults\Configuration;
 use JosefGlatz\CropVariantsBuilder\Defaults\CropArea;
 
-
-
 call_user_func(
     static function ($extKey, $table) {
 

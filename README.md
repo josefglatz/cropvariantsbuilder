@@ -89,18 +89,18 @@ configurationProviderExtension = my_nice_site_extension
 
 > *So if you place the configuration file in
 > `EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`
-> you have to set the value to `my_nice_site`.*
+> you have to set the value to `my_nice_site_extension`.*
 
 The following example shows the resulting PHP configuration part:
 
 ```php
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cropvariantsbuilder'] = serialize([
-    'configurationProviderExtension' => 'my_nice_site'
+    'configurationProviderExtension' => 'my_nice_site_extension'
 ]);
 
 // TYPO3 >= 9.5 LTS:
 $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['cropvariantsbuilder'] = [
-    'configurationProviderExtension' => 'my_nice_site'
+    'configurationProviderExtension' => 'my_nice_site_extension'
 ];
 ```
 
@@ -170,7 +170,7 @@ current development state.
 
 ## Created by
 
-http://josefglatz.at/
+<http://josefglatz.at/>
 
 ## Support
 
