@@ -151,6 +151,12 @@ import any other YAML file. You don't have to rely on the default
 CropVariants.yaml if the resulting YAML file includes a configuration
 for every necessary part.
 
+## Detailed manual and more examples
+
+* [Handling of cropVariants in TYPO3](Documentation/Markdown/Images/Index.md#handling-of-cropvariants-in-typo3)
+* [DefaultsAndPresets](Documentation/Markdown/Images/DefaultsAndPresets.md)
+* [CropVariantsBuilder Examples](Documentation/Markdown/Images/CropVariantsBuilder.md)
+
 ---
 
 ## Development
