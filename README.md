@@ -28,6 +28,7 @@
    3. [CropVariantsBuilder](Documentation/Markdown/Images/CropVariantsBuilder.md)
       1. [Example 1: Set a global default cropVariants configuration](Documentation/Markdown/Images/CropVariantsBuilder.md#example-1-set-a-global-default-cropvariants-configuration)
       2. [Example 2: Set custom cropVariants for a specific field of a specific table (pages.tx_my_nice_site_extension_nav_image)](Documentation/Markdown/Images/CropVariantsBuilder.md#example-2-set-custom-cropvariants-for-a-specific-field-of-a-specific-table-pagestx_my_nice_site_extension_nav_image)
+      3. [Example 3: Set custom cropVariants for tx_news_domain_model_news.fal_media](Documentation/Markdown/Images/CropVariantsBuilder.md#example-3-set-custom-cropvariants-for-tx_news_domain_model_newsfal_media)
 
 ---
 
