@@ -27,7 +27,7 @@ is loaded automatically.
 1. [Predefined aspectRatios](DefaultsAndPresets.md#predefined-aspectratios)
 2. [Predefined coverAreas](DefaultsAndPresets.md#predefined-coverareas)
 3. [Predefined cropAreas](DefaultsAndPresets.md#predefined-cropareas)
-4. [List of default cropVariants](DefaultsAndPresets.md#list-of-default-cropvariants)
+4. [List of default cropVariants](DefaultsAndPresets.md)
 
 
 ---
