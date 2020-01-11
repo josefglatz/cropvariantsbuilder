@@ -9,18 +9,18 @@
 
 ---
 
-1. [About](#about)
+1. → [About](#about)
    1. [Past](#past)
    2. [Present](#present)
    3. [Future](#future)
-2. [Installation](#installation)
+2. → [Installation](#installation)
    1. [Installation using Composer](#installation-using-composer)
    2. [Installation as extension from TYPO3 Extension Repository (TER)](#installation-as-extension-from-typo3-extension-repository-ter)
-3. [Configuration](#configuration)
+3. → [Configuration](#configuration)
    1. [Name of the extension where the general configuration file lives](#name-of-the-extension-where-the-general-configuration-file-lives)
    2. [Example of using your own CropVariants.yaml file](#example-of-using-your-own-cropvariantsyaml-file)
    3. [Example of using your own CropVariants.yaml file while using the \TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader->load() imports feature](#example-of-using-your-own-cropvariantsyaml-file-while-using-the-typo3cmscoreconfigurationloaderyamlfileloader-load-imports-feature)
-4. [Detailed manual and more examples](#detailed-manual-and-more-examples)
+4. → [Detailed manual and more examples](#detailed-manual-and-more-examples)
    1. [Handling of cropVariants in TYPO3](Documentation/Markdown/Images/Index.md#handling-of-cropvariants-in-typo3)
       1. [Centralized configuration for AspectRatio, Cover-/CropArea presets and CropVariant definitions](Documentation/Markdown/Images/Index.md#centralized-configuration-for-aspectratio-cover-croparea-presets-and-cropvariant-definitions)
       2. [Handling of cropVariants in TYPO3: Simplified cropVariants configuration for the Table Configuration Array](Documentation/Markdown/Images/Index.md#simplified-cropvariants-configuration-for-the-table-configuration-array)
