@@ -3,13 +3,14 @@
 namespace JosefGlatz\CropVariantsBuilder;
 
 use JosefGlatz\CropVariantsBuilder\Defaults\CropArea;
+use JosefGlatz\CropVariantsBuilder\Domain\Model\Dto\EmConfiguration;
 use JosefGlatz\CropVariantsBuilder\Utility\ArrayTool;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CropVariant
 {
-    protected const LLPATH = 'LLL:EXT:theme/Resources/Private/Language/locallang_BackendGeneral.xlf:';
+    protected const LLPATH = 'LLL:EXT:%s/Resources/Private/Language/%s.xlf:';
     protected const LLPATHPREFIX = 'crop_variants.';
     protected const LLPATHSUFFIX = '.label';
 
@@ -179,7 +180,7 @@ class CropVariant
     }
 
     /**
-     * Remove a allowedAspectRatio
+     * Remove an allowedAspectRatio
      *
      * @param string $ratio name of allowed aspect ratio
      * @return $this
@@ -225,8 +226,8 @@ class CropVariant
      * Return final cropVariant configuration
      *  and throw exceptions if some necessary options aren't set
      *
-     * @TODO: TYPO3-Distribution: Only return non emtpy sub-arrays
-     * @TODO: TYPO3-Distribution: Reduce checks by moving them to their classes (still needs introduced)
+     * @TODO: Only return non emtpy sub-arrays
+     * @TODO: Reduce checks by moving them to their classes (still needs introduced)
      *
      * @return array
      * @throws \UnexpectedValueException
@@ -284,15 +285,15 @@ class CropVariant
                 'focusArea' => $this->focusArea,
                 'coverAreas' => $this->coverAreas,
                 'allowedAspectRatios' => $this->allowedAspectRatios,
-                'selectedRatio' => $this->selectedRatio
-            ]
+                'selectedRatio' => $this->selectedRatio,
+            ],
         ];
     }
 
     /**
      * Try to set the title
      *
-     *  - a) ...based on per convention defined localized strings in specific xlf file
+     *  - a) ...based on per convention defined localized strings in specific xlf file(s)
      *  - b) by value of $this->name as a fallback
      *
      * @throws \InvalidArgumentException
@@ -317,6 +318,8 @@ class CropVariant
      * Translation attempt
      *
      *  based on label convention key `crop_variants.$key.label`
+     *      1. in EXT:cropvariantsbuilder
+     *      2. in EXT:<configuredConfigurationProviderExtension>
      *
      * @param string $key
      * @return string 'LLL:...' string or empty string if localization wasn't successful
@@ -325,9 +328,21 @@ class CropVariant
     protected function defaultLocalizationAttempt(string $key): string
     {
         $result = '';
-        $lllKeyToCheck = self::LLPATH . self::LLPATHPREFIX . trim(htmlspecialchars($key)) . self::LLPATHSUFFIX;
-        if (!empty($this->getLanguageService()->sL($lllKeyToCheck))) {
-            return $lllKeyToCheck;
+        $emConf = GeneralUtility::makeInstance(EmConfiguration::class);
+        $defaultLllKeyToCheck = sprintf(self::LLPATH, 'cropvariantsbuilder',
+                'locallang') . self::LLPATHPREFIX . trim(htmlspecialchars($key)) . self::LLPATHSUFFIX;
+        $configurationProviderLllKeyToCheck = sprintf(self::LLPATH, $emConf->getConfigurationProviderExtension(),
+                $emConf->getConfigurationProviderLocallangFilename()) . self::LLPATHPREFIX . trim(htmlspecialchars($key)) . self::LLPATHSUFFIX;
+
+        // check translation in EXT:cropvariantsbuilder
+        if (!empty($this->getLanguageService()->sL($defaultLllKeyToCheck))) {
+            $result = $defaultLllKeyToCheck;
+        }
+        // check translation in given configuration provider extension
+        if (!empty($emConf->getConfigurationProviderExtension())
+            && !empty($emConf->getConfigurationProviderLocallangFilename())
+            && !empty($this->getLanguageService()->sL($configurationProviderLllKeyToCheck))) {
+            $result = $configurationProviderLllKeyToCheck;
         }
 
         return $result;

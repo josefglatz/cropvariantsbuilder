@@ -31,11 +31,23 @@ class EmConfiguration implements SingletonInterface
     protected $configurationProviderExtension = '';
 
     /**
+     * @var string
+     */
+    protected $configurationProviderLocallangFilename = 'locallang';
+
+    /**
      * @return string
      */
     public function getConfigurationProviderExtension(): string
     {
-        return $this->configurationProviderExtension;
+        return trim($this->configurationProviderExtension);
     }
 
+    /**
+     * @return string
+     */
+    public function getConfigurationProviderLocallangFilename(): string
+    {
+        return trim($this->configurationProviderLocallangFilename);
+    }
 }

@@ -106,7 +106,7 @@ module or directly via
 
 ### Name of the extension where the general configuration file lives
 
-The following option has to be set within the TYPO3 extension
+The following options must to be set within the TYPO3 extension
 configuration:
 
 ```
@@ -117,16 +117,28 @@ configurationProviderExtension = my_nice_site_extension
 > `EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`
 > you have to set the value to `my_nice_site_extension`.*
 
+
+```
+configurationProviderLocallangFilename = locallang
+```
+
+> *So if you place the translations in
+> `EXT:my_nice_site_extension/Resources/Private/Language/locallang.xlf`
+> you have to set the value to `locallang`.*
+
+
 The following example shows the resulting PHP configuration part:
 
 ```php
 $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cropvariantsbuilder'] = serialize([
-    'configurationProviderExtension' => 'my_nice_site_extension'
+    'configurationProviderExtension' => 'my_nice_site_extension',
+    'configurationProviderLocallangFilename' => 'locallang',
 ]);
 
 // TYPO3 >= 9.5 LTS:
 $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['cropvariantsbuilder'] = [
-    'configurationProviderExtension' => 'my_nice_site_extension'
+    'configurationProviderExtension' => 'my_nice_site_extension',
+    'configurationProviderLocallangFilename' => 'locallang',
 ];
 ```
 

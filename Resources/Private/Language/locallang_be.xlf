@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-    <file source-language="en" date="2020-01-08T12:05:51+01:00">
+    <file source-language="en" date="2020-01-11T21:51:02+01:00">
         <body>
             <trans-unit id="extmng.configurationProviderExtension">
                 <source>Configuration Provider Extension: The name of the extension where the YAML-configuration lives. The path within the defined extension must be &#34;/Configuration/ImageManipulation/CropVariants.yaml&#34;.</source>
+            </trans-unit>
+            <trans-unit id="extmng.configurationProviderLocallangFilename">
+                <source>Localized Language file name without file extension: The file name without file extension where you want to overwrite or extend the automatic translation feature. E.g. &#34;locallang&#34; if the file is located at &#34;EXT:&lt;configurationProviderExtension&gt;/Resources/Private/Language/locallang.xlf&#34;.</source>
             </trans-unit>
         </body>
     </file>
