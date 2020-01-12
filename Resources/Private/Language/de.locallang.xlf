@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages">
+		<body>
+		<trans-unit id="crop_variants.default.label" approved="yes">
+			<source>Default</source>
+			<target>Standard</target>
+		</trans-unit>
+		<trans-unit id="crop_variants.logo.label" approved="yes">
+			<target>Logo spezifischer Crop</target>
+		</trans-unit>
+		<trans-unit id="crop_variants.opengraph.label" approved="yes">
+			<source>Open Graph (Official Suggestion 2018)</source>
+			<target>Open Graph (Offizielle Empfehlung aus 2018)</target>
+		</trans-unit>
+		<trans-unit id="crop_variants.twitterimage.label" approved="yes">
+			<source>Twitter Image (Official Suggestion 2018)</source>
+			<target>Twitter Bild (Offizielle Empfehlung aus 2018)</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>
