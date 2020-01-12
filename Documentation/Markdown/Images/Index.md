@@ -8,7 +8,7 @@ This TYPO3 extension tries to help you as much with configuring
 cropVariants in different situations:
 
 1. [Centralized configuration for AspectRatio, Cover-/CropArea presets and CropVariant definitions](#centralized-configuration-for-aspectratio-cover-croparea-presets-and-cropvariant-definitions)
-2. [Simplified cropVariants configuration for the Table Configuration Array](simplified-cropvariants-configuration-for-the-table-configuration-array)
+2. [Simplified cropVariants configuration for the Table Configuration Array](#simplified-cropvariants-configuration-for-the-table-configuration-array)
    (custom CropVariantsBuilder)
    1. [Custom CropVariants Builder details](CropVariantsBuilder.md)
 
