@@ -124,7 +124,7 @@ configurationProviderLocallangFilename = locallang
 
 > *So if you place the translations in
 > `EXT:my_nice_site_extension/Resources/Private/Language/locallang.xlf`
-> you have to set the value to `locallang`.*
+> you have to set the value to `locallang`.* Read more about the supported [translation logic](Documentation/Markdown/Images/TranslationLogic.md).
 
 
 The following example shows the resulting PHP configuration part:
@@ -194,6 +194,7 @@ for every necessary part.
 * [Handling of cropVariants in TYPO3](Documentation/Markdown/Images/Index.md#handling-of-cropvariants-in-typo3)
 * [DefaultsAndPresets](Documentation/Markdown/Images/DefaultsAndPresets.md)
 * [CropVariantsBuilder Examples](Documentation/Markdown/Images/CropVariantsBuilder.md)
+* [Translation logic for cropVariant label](Documentation/Markdown/Images/TranslationLogic.md)
 
 ---
 

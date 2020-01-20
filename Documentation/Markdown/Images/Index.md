@@ -1,4 +1,4 @@
-Back to [Index](Index.md)
+Back to [README](../../../README.md)
 
 ---
 
@@ -11,6 +11,7 @@ cropVariants in different situations:
 2. [Simplified cropVariants configuration for the Table Configuration Array](#simplified-cropvariants-configuration-for-the-table-configuration-array)
    (custom CropVariantsBuilder)
    1. [Custom CropVariants Builder details](CropVariantsBuilder.md)
+3. [Translation logic for cropVariant label](TranslationLogic.md)
 
 ---
 
