@@ -7,8 +7,6 @@ class CoverArea
     /**
      * Retrieve cover area presets
      *
-     * @TODO: split single vs multiple (get, getMultiple)
-     *
      * @param array $keys
      * @return array all retrieved cover areas
      * @throws \UnexpectedValueException
