@@ -30,6 +30,7 @@
       2. [Example 2: Set custom cropVariants for a specific field of a specific table (pages.tx_my_nice_site_extension_nav_image)](Documentation/Markdown/Images/CropVariantsBuilder.md#example-2-set-custom-cropvariants-for-a-specific-field-of-a-specific-table-pagestx_my_nice_site_extension_nav_image)
       3. [Example 3: Set custom cropVariants for tx_news_domain_model_news.fal_media](Documentation/Markdown/Images/CropVariantsBuilder.md#example-3-set-custom-cropvariants-for-tx_news_domain_model_newsfal_media)
       4. [Example 4: Set custom cropVariants for `tt_content.image` for CType `tx_my_nice_site_extension_custom_ce1`](Documentation/Markdown/Images/CropVariantsBuilder.md#example-4-set-custom-cropvariants-for-tt_contentimage-for-ctype-tx_my_nice_site_extension_custom_ce1)
+   4. [Translation logic for cropVariant label](Documentation/Markdown/Images/TranslationLogic.md)
 
 ---
 
