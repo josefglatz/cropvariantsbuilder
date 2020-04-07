@@ -37,6 +37,12 @@ Crop Variants Builder
 
 .. toctree::
    :hidden:
+   :caption: INTRODUCTION
+
+   Introduction/Index
+
+.. toctree::
+   :hidden:
    :caption: OTHER
 
    Sitemap/Index
