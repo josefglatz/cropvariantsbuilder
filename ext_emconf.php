@@ -3,7 +3,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Crop Variants Builder',
     'description' => 'Simplify writing cropVariants for TYPO3 Integrators/Developers',
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'state' => 'stable',
     'author' => 'Josef Glatz',
     'author_email' => 'josefglatz@gmailcom',
