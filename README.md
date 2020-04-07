@@ -21,16 +21,16 @@
    2. [Example of using your own CropVariants.yaml file](#example-of-using-your-own-cropvariantsyaml-file)
    3. [Example of using your own CropVariants.yaml file while using the \TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader->load() imports feature](#example-of-using-your-own-cropvariantsyaml-file-while-using-the-typo3cmscoreconfigurationloaderyamlfileloader-load-imports-feature)
 4. → [Detailed manual and more examples](#detailed-manual-and-more-examples)
-   1. [Handling of cropVariants in TYPO3](Documentation/Markdown/Images/Index.md#handling-of-cropvariants-in-typo3)
-      1. [Centralized configuration for AspectRatio, Cover-/CropArea presets and CropVariant definitions](Documentation/Markdown/Images/Index.md#centralized-configuration-for-aspectratio-cover-croparea-presets-and-cropvariant-definitions)
-      2. [Handling of cropVariants in TYPO3: Simplified cropVariants configuration for the Table Configuration Array](Documentation/Markdown/Images/Index.md#simplified-cropvariants-configuration-for-the-table-configuration-array)
-   2. [Defaults And Presets](Documentation/Markdown/Images/DefaultsAndPresets.md)
-   3. [CropVariantsBuilder](Documentation/Markdown/Images/CropVariantsBuilder.md)
-      1. [Example 1: Set a global default cropVariants configuration](Documentation/Markdown/Images/CropVariantsBuilder.md#example-1-set-a-global-default-cropvariants-configuration)
-      2. [Example 2: Set custom cropVariants for a specific field of a specific table (pages.tx_my_nice_site_extension_nav_image)](Documentation/Markdown/Images/CropVariantsBuilder.md#example-2-set-custom-cropvariants-for-a-specific-field-of-a-specific-table-pagestx_my_nice_site_extension_nav_image)
-      3. [Example 3: Set custom cropVariants for tx_news_domain_model_news.fal_media](Documentation/Markdown/Images/CropVariantsBuilder.md#example-3-set-custom-cropvariants-for-tx_news_domain_model_newsfal_media)
-      4. [Example 4: Set custom cropVariants for `tt_content.image` for CType `tx_my_nice_site_extension_custom_ce1`](Documentation/Markdown/Images/CropVariantsBuilder.md#example-4-set-custom-cropvariants-for-tt_contentimage-for-ctype-tx_my_nice_site_extension_custom_ce1)
-   4. [Translation logic for cropVariant label](Documentation/Markdown/Images/TranslationLogic.md)
+   1. [Handling of cropVariants in TYPO3](Resources/LegacyDocumentation/Markdown/Images/Index.md#handling-of-cropvariants-in-typo3)
+      1. [Centralized configuration for AspectRatio, Cover-/CropArea presets and CropVariant definitions](Resources/LegacyDocumentation/Markdown/Images/Index.md#centralized-configuration-for-aspectratio-cover-croparea-presets-and-cropvariant-definitions)
+      2. [Handling of cropVariants in TYPO3: Simplified cropVariants configuration for the Table Configuration Array](Resources/LegacyDocumentation/Markdown/Images/Index.md#simplified-cropvariants-configuration-for-the-table-configuration-array)
+   2. [Defaults And Presets](Resources/LegacyDocumentation/Markdown/Images/DefaultsAndPresets.md)
+   3. [CropVariantsBuilder](Resources/LegacyDocumentation/Markdown/Images/CropVariantsBuilder.md)
+      1. [Example 1: Set a global default cropVariants configuration](Resources/LegacyDocumentation/Markdown/Images/CropVariantsBuilder.md#example-1-set-a-global-default-cropvariants-configuration)
+      2. [Example 2: Set custom cropVariants for a specific field of a specific table (pages.tx_my_nice_site_extension_nav_image)](Resources/LegacyDocumentation/Markdown/Images/CropVariantsBuilder.md#example-2-set-custom-cropvariants-for-a-specific-field-of-a-specific-table-pagestx_my_nice_site_extension_nav_image)
+      3. [Example 3: Set custom cropVariants for tx_news_domain_model_news.fal_media](Resources/LegacyDocumentation/Markdown/Images/CropVariantsBuilder.md#example-3-set-custom-cropvariants-for-tx_news_domain_model_newsfal_media)
+      4. [Example 4: Set custom cropVariants for `tt_content.image` for CType `tx_my_nice_site_extension_custom_ce1`](Resources/LegacyDocumentation/Markdown/Images/CropVariantsBuilder.md#example-4-set-custom-cropvariants-for-tt_contentimage-for-ctype-tx_my_nice_site_extension_custom_ce1)
+   4. [Translation logic for cropVariant label](Resources/LegacyDocumentation/Markdown/Images/TranslationLogic.md)
 
 ---
 
@@ -125,7 +125,7 @@ configurationProviderLocallangFilename = locallang
 
 > *So if you place the translations in
 > `EXT:my_nice_site_extension/Resources/Private/Language/locallang.xlf`
-> you have to set the value to `locallang`.* Read more about the supported [translation logic](Documentation/Markdown/Images/TranslationLogic.md).
+> you have to set the value to `locallang`.* Read more about the supported [translation logic](Resources/LegacyDocumentation/Markdown/Images/TranslationLogic.md).
 
 
 The following example shows the resulting PHP configuration part:
@@ -192,10 +192,10 @@ for every necessary part.
 
 ## Detailed manual and more examples
 
-* [Handling of cropVariants in TYPO3](Documentation/Markdown/Images/Index.md#handling-of-cropvariants-in-typo3)
-* [DefaultsAndPresets](Documentation/Markdown/Images/DefaultsAndPresets.md)
-* [CropVariantsBuilder Examples](Documentation/Markdown/Images/CropVariantsBuilder.md)
-* [Translation logic for cropVariant label](Documentation/Markdown/Images/TranslationLogic.md)
+* [Handling of cropVariants in TYPO3](Resources/LegacyDocumentation/Markdown/Images/Index.md#handling-of-cropvariants-in-typo3)
+* [DefaultsAndPresets](Resources/LegacyDocumentation/Markdown/Images/DefaultsAndPresets.md)
+* [CropVariantsBuilder Examples](Resources/LegacyDocumentation/Markdown/Images/CropVariantsBuilder.md)
+* [Translation logic for cropVariant label](Resources/LegacyDocumentation/Markdown/Images/TranslationLogic.md)
 
 ---
 

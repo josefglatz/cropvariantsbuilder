@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace JosefGlatz\CropVariantsBuilder\Service;
 
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class VersionService
@@ -40,7 +42,17 @@ class VersionService
      */
     protected static function evaluateCondition(int $min, int $max): bool
     {
-        return VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) <= $max
-            && VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= $min;
+        $typo3Version = self::getTypo3Version();
+        return VersionNumberUtility::convertVersionNumberToInteger($typo3Version) <= $max
+            && VersionNumberUtility::convertVersionNumberToInteger($typo3Version) >= $min;
+    }
+
+    protected static function getTypo3Version(): string
+    {
+        if (class_exists(\TYPO3\CMS\Core\Information\Typo3Version::class)) {
+            return GeneralUtility::makeInstance(Typo3Version::class)->getVersion();
+        }
+
+        return TYPO3_version;
     }
 }
