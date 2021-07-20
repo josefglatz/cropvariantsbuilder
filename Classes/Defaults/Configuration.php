@@ -1,9 +1,11 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace JosefGlatz\CropVariantsBuilder\Defaults;
 
 use JosefGlatz\CropVariantsBuilder\Domain\Model\Dto\EmConfiguration;
 use JosefGlatz\CropVariantsBuilder\Service\VersionService;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -14,6 +16,8 @@ class Configuration
      * Relative path to configuration file
      */
     public const CONFIGFILE = '/Configuration/ImageManipulation/CropVariants.yaml';
+
+    protected const CACHE_IDENTIFIER = 'cropvariants_configuration';
 
     /**
      * Returns the processed configuration array from the YAML configuration file
@@ -26,22 +30,22 @@ class Configuration
         // Initiate Classes
         $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
 
+        if (($configuration = static::getCache()->get(static::CACHE_IDENTIFIER)) === false) {
+            // Get extension name and path from where the custom CropVariants.yaml file should be loaded
+            $configFilePath = self::getActiveConfigurationFilePath();
 
-        // Get extension name and path from where the custom CropVariants.yaml file should be loaded
-        $configFilePath = self::getActiveConfigurationFilePath();
-
-        // Set fallback if custom CropVariants.yaml file could not be processed
-        $configuration = self::loadYamlFile('EXT:cropvariantsbuilder' . self::CONFIGFILE);
-
-
-        // Try to load the custom CropVariants.yaml and log errors just in case
-        try {
-            $configuration = self::loadYamlFile($configFilePath);
-        } catch (\UnexpectedValueException $e) {
-            $logger->error(sprintf('The CONFIGFILE "%s" could not be parsed.', $configFilePath), [$e->getMessage()]);
-
-        } catch (\RuntimeException $e) {
-            $logger->error(sprintf('The CONFIGFILE "%s" could not be found.', $configFilePath), [$e->getMessage()]);
+            // Try to load the custom CropVariants.yaml and log errors just in case
+            try {
+                $configuration = self::loadYamlFile($configFilePath);
+            } catch (\UnexpectedValueException $e) {
+                $logger->error(sprintf('The CONFIGFILE "%s" could not be parsed.', $configFilePath), [$e->getMessage()]);
+            } catch (\RuntimeException $e) {
+                $logger->error(sprintf('The CONFIGFILE "%s" could not be found.', $configFilePath), [$e->getMessage()]);
+            }
+            if (!isset($configuration)) {
+                $configuration = self::loadYamlFile('EXT:cropvariantsbuilder' . self::CONFIGFILE);
+            }
+            static::getCache()->set(static::CACHE_IDENTIFIER, $configuration);
         }
         $defaults = $configuration['imageManipulation']['cropVariants']['defaults'];
         // Check if configuration array path exists
@@ -93,5 +97,10 @@ class Configuration
             ->getConfigurationProviderExtension();
 
         return 'EXT:' . $configurationProviderExtension . self::CONFIGFILE;
+    }
+
+    protected static function getCache(): FrontendInterface
+    {
+        return GeneralUtility::makeInstance(CacheManager::class)->getCache('runtime');
     }
 }
