@@ -14,8 +14,7 @@ class EmConfiguration implements SingletonInterface
     {
         if (VersionService::isVersion8()) {
             $settings = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cropvariantsbuilder'], [ false ]);
-        }
-        if (VersionService::isVersion9() || VersionService::isVersion10()) {
+        } else {
             $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('cropvariantsbuilder');
         }
         foreach ($settings as $key => $value) {

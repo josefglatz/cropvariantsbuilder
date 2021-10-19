@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace JosefGlatz\CropVariantsBuilder\Service;
 
@@ -15,24 +15,6 @@ class VersionService
         $constraintVersionMin = 8000000;
 
         return static::evaluateCondition($constraintVersionMin, $constraintVersionMax);
-
-    }
-    public static function isVersion9(): bool
-    {
-        $constraintVersionMax = 9999999;
-        $constraintVersionMin = 9000000;
-
-        return static::evaluateCondition($constraintVersionMin, $constraintVersionMax);
-
-    }
-
-    public static function isVersion10(): bool
-    {
-        $constraintVersionMax = 10999999;
-        $constraintVersionMin = 10000000;
-
-        return static::evaluateCondition($constraintVersionMin, $constraintVersionMax);
-
     }
 
     /**
