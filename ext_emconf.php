@@ -1,5 +1,4 @@
 <?php
-
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Crop Variants Builder',
     'description' => 'Simplify writing cropVariants for TYPO3 Integrators/Developers',
@@ -11,10 +10,15 @@ $EM_CONF[$_EXTKEY] = [
     'category' => 'be',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.5.0-11.5.99',
+            'typo3' => '10.4.0-12.0.0',
             'php' => '7.4.1'
         ],
         'conflicts' => [],
         'suggests' => [],
     ],
+    'autoload' => [
+        'psr-4' => [
+           'JosefGlatz\\CropVariantsBuilder\\' => 'Classes'
+        ]
+     ],
 ];
