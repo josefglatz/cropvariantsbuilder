@@ -50,7 +50,7 @@ allowed aspect ratios are configured in this example.
 
 ```php
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table) {
@@ -165,7 +165,7 @@ xs'n'up, md'n'up and lg'n'up. All three with same allowed aspectRatios.
 
 ```php
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table) {
@@ -275,7 +275,7 @@ call_user_func(
 
 ```php
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table) {
@@ -349,7 +349,7 @@ not every news item has the same aspect ratio.
 
 ```php
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table) {
@@ -391,7 +391,7 @@ content element (CType)
 
 ```php
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table, $type) {
