@@ -149,7 +149,7 @@ Just clone the file
 `EXT:cropvariantsbuilder/Configuration/ImageManipulation/CropVariants.yaml`
 to
 `EXT:my_nice_site_extension/Configuration/ImageManipulation/CropVariants.yaml`
-and modify it however you want. Whith that approach, you have no
+and modify it however you want. With that approach, you have no
 dependencies on the default CropVariants.yaml of
 `EXT:cropvariantsbuilder`.
 
