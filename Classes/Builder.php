@@ -221,7 +221,7 @@ class Builder
                 // type set, no customChildType
                 if (!empty($GLOBALS['TCA'][$this->table]['types'][$this->type]['columnsOverrides'][$this->fieldName]['config']['overrideChildTca']['columns'][$imageManipulationField]['config']['cropVariants'])) {
                     throw new \UnexpectedValueException('cropVariants configuration can not be persisted.
-                    cropVariants configuration already exists for' . $this->table . '.' . $this->fieldName . (!empty($this->type) ? ' (type ' . $this->type . ')' : '') . '.', 1520884830);
+                    cropVariants configuration already exists for ' . $this->table . '.' . $this->fieldName . (!empty($this->type) ? ' (type ' . $this->type . ')' : '') . '.', 1520884830);
                 }
                 $GLOBALS['TCA'][$this->table]['types'][$this->type]['columnsOverrides'][$this->fieldName]['config']['overrideChildTca']['columns'][$imageManipulationField]['config']['cropVariants'] = $config;
             }
