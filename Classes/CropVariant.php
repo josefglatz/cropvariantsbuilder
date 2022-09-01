@@ -5,7 +5,11 @@ namespace JosefGlatz\CropVariantsBuilder;
 use JosefGlatz\CropVariantsBuilder\Defaults\CropArea;
 use JosefGlatz\CropVariantsBuilder\Domain\Model\Dto\EmConfiguration;
 use JosefGlatz\CropVariantsBuilder\Utility\ArrayTool;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Authentication\AbstractUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CropVariant
@@ -352,10 +356,22 @@ class CropVariant
      * Returns LanguageService
      *
      * @return LanguageService
-     * @throws \InvalidArgumentException
      */
     protected function getLanguageService(): LanguageService
     {
-        return GeneralUtility::makeInstance(LanguageService::class);
+        $languageServiceFactory = GeneralUtility::makeInstance(LanguageServiceFactory::class);
+        $beUser = $GLOBALS['BE_USER'] ?? null;
+
+        if ($beUser instanceof AbstractUserAuthentication) {
+            return $languageServiceFactory->createFromUserPreferences($beUser);
+        }
+
+        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
+
+        if ($request instanceof ServerRequestInterface && $request->getAttribute('language') instanceof SiteLanguage) {
+            return $languageServiceFactory->createFromSiteLanguage($request->getAttribute('language'));
+        }
+
+        return $languageServiceFactory->create('default');
     }
 }
