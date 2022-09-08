@@ -286,8 +286,8 @@ class CropVariant
             $this->name => [
                 'title' => $this->title,
                 'cropArea' => $this->cropArea,
-                'focusArea' => $this->focusArea,
-                'coverAreas' => $this->coverAreas,
+                'focusArea' => $this->focusArea ?: null,
+                'coverAreas' => $this->coverAreas ?: null,
                 'allowedAspectRatios' => $this->allowedAspectRatios,
                 'selectedRatio' => $this->selectedRatio,
             ],
