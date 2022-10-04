@@ -15,13 +15,15 @@ class CoverArea
     {
         $coverAreaPresets = Configuration::defaultConfiguration('coverAreas');
         $coverAreas = [];
-        foreach ($keys as $key => $item) {
-            if (isset($coverAreaPresets[$item]) && \is_array($coverAreaPresets[$item])) {
-                foreach ($coverAreaPresets[$item] as $coverAreaPresetArray) {
-                    $coverAreas[] = $coverAreaPresetArray;
+        if (!empty($coverAreaPresets)) {
+            foreach ($keys as $key => $item) {
+                if (isset($coverAreaPresets[$item]) && \is_array($coverAreaPresets[$item])) {
+                    foreach ($coverAreaPresets[$item] as $coverAreaPresetArray) {
+                        $coverAreas[] = $coverAreaPresetArray;
+                    }
+                } else {
+                    throw new \UnexpectedValueException('Given coverArea preset "' . $key . '" not found or not from type array."', 1520430221);
                 }
-            } else {
-                throw new \UnexpectedValueException('Given coverArea preset "' . $key . '" not found or not from type array."', 1520430221);
             }
         }
         return $coverAreas;

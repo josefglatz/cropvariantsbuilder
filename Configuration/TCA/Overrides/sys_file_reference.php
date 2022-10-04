@@ -5,7 +5,9 @@ use JosefGlatz\CropVariantsBuilder\Builder;
 use JosefGlatz\CropVariantsBuilder\CropVariant;
 use JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio;
 use JosefGlatz\CropVariantsBuilder\Defaults\Configuration;
+use JosefGlatz\CropVariantsBuilder\Defaults\CoverArea;
 use JosefGlatz\CropVariantsBuilder\Defaults\CropArea;
+use JosefGlatz\CropVariantsBuilder\Defaults\FocusArea;
 
 call_user_func(
     static function ($extKey, $table) {
@@ -28,7 +30,9 @@ call_user_func(
             foreach ($defaults as $key => $config) {
                 $defaultCrop = $defaultCrop->addCropVariant(
                     CropVariant::create($key)
-                        ->setCropArea(CropArea::get())
+                        ->setCropArea(CropArea::get($key))
+                        ->setFocusArea(FocusArea::get($key))
+                        ->addCoverAreas(CoverArea::get([$key]))
                         ->addAllowedAspectRatios(AspectRatio::get($config['aspectRatios']))
                         ->get()
                 );
