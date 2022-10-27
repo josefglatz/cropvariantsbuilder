@@ -11,12 +11,12 @@ class FocusArea
      * @return array focusArea (no default is returned as there is no focusArea necessary)
      * @throws \UnexpectedValueException
      */
-    public static function get(string $name): array
+    public static function get(string $name = 'default'): array
     {
         $focusAreas = Configuration::defaultConfiguration('focusAreas');
         if (isset($focusAreas[$name]) && \is_array($focusAreas[$name])) {
             return $focusAreas[$name];
         }
-        throw new \UnexpectedValueException('Given focus area "' . $name . '" not found."', 1522992127);
+        return [];
     }
 }

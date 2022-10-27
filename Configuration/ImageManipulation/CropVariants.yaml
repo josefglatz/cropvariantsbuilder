@@ -5,10 +5,11 @@ imageManipulation:
   cropVariants:
     defaults:
 
-
       ##################################################################################################################
       ### Set up your default cropVariants configuration for sys_file_reference.columns.crop
+      ### Ratios mentioned here must be configured in "Available Aspect Ratios" below!
       ###
+      ###     Mandatory configuration!
       ###     Each cropVariant must have a minimum of one aspectRatio
       ###     for sys_file_reference.columns.crop (Look for "persistToDefaultTableTca")
       ###
@@ -21,9 +22,15 @@ imageManipulation:
             - "3:4"
             - "1:1"
             - "NaN"
+        mobile:
+          aspectRatios:
+            - "1:1"
+            - "NaN"
 
       ##################################################################################################################
+      ### Available Aspect Ratios (Mandatory configuration!)
       ### Set all your available aspectRatios (add/remove as you need it in you specific project)
+      ### This is the "pool" you can select from for configurations in defaultCropVariantsConfiguration
       aspectRatios:
         # Open Graph, Facebook, Twitter Image (official @ early 2018)
         "1.91:1":
@@ -71,61 +78,43 @@ imageManipulation:
             title: "LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free"
             value: 0.0
 
-
       ##################################################################################################################
-      ### Set all your available coverAreas (add/remove as you need it in you specific project)
-      coverAreas:
-        # 1_1_circle can be used for square image (1:1) with CSS `border-radius: 50%` (Tries to cover edges)
-        1_1_circle:
-          - { x: 0.0, y: 0.0, width: 0.25, height: 0.25 }
-          - { x: 0.75, y: 0.0, width: 0.25, height: 0.25 }
-          - { x: 0.0, y: 0.75, width: 0.25, height: 0.25 }
-          - { x: 0.75, y: 0.75, width: 0.25, height: 0.25 }
-        # Cover lower third of image
-        lower_third:
-          - { x: 0.0, y: 0.67, width: 1.0, height: 0.33 }
-
-
-      ##################################################################################################################
-      ### Set all your available coverAreas (add/remove as you need it in you specific project)
+      ### Define default crop areas (Mandatory configuration!)
       cropAreas:
         default:
           x: 0.0
           y: 0.0
           width: 1.0
           height: 1.0
-        "0.75":
+        mobile:
           x: 0.125
           y: 0.125
           width: 0.75
           height: 0.75
-        "0.5":
-          x: 0.25
-          y: 0.25
-          width: 0.5
-          height: 0.5
-        "0.25":
-          x: 0.375
-          y: 0.375
-          width: 0.25
-          height: 0.2
-
 
       ##################################################################################################################
-      ### Set all your available focusAreas (add/remove as you need it in you specific project)
+      ### Define coverAreas (Optional configuration. Omit the coverAreas key if no cover areas needed)
+      coverAreas:
+        # 1_1_circle can be used for square image (1:1) with CSS `border-radius: 50%` (Tries to cover edges)
+        default:
+          - { x: 0.0, y: 0.0, width: 0.25, height: 0.25 }
+          - { x: 0.75, y: 0.0, width: 0.25, height: 0.25 }
+          - { x: 0.0, y: 0.75, width: 0.25, height: 0.25 }
+          - { x: 0.75, y: 0.75, width: 0.25, height: 0.25 }
+        # Cover lower third of image
+        mobile:
+          - { x: 0.0, y: 0.67, width: 1.0, height: 0.33 }
+
+      ##################################################################################################################
+      ### Define focusAreas (Optional configuration. Omit the focusAreas key if no focus areas needed)
       focusAreas:
-        "0.75":
+        "default":
           x: 0.125
           y: 0.125
           width: 0.75
           height: 0.75
-        "0.5":
+        "mobile":
           x: 0.25
           y: 0.25
           width: 0.5
           height: 0.5
-        "0.25":
-          x: 0.375
-          y: 0.375
-          width: 0.25
-          height: 0.25

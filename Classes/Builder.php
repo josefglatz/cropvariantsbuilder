@@ -105,6 +105,7 @@ class Builder
                     1520906581
                 );
             }
+
             $this->cropVariants[$key] = $item;
         }
 
