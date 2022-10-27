@@ -203,7 +203,7 @@ for every necessary part.
 
 > The ongoing development is done within the master branch!
 
-You can use `composer require-dev
+You can use `composer require
 josefglatz/cropvariantsbuilder:dev-master` if you want to test the
 current development state.
 
