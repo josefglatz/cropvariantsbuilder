@@ -282,23 +282,16 @@ class CropVariant
             );
         }
 
-        $cropVariant = [
+        return [
             $this->name => [
                 'title' => $this->title,
                 'cropArea' => $this->cropArea,
+                'focusArea' => $this->focusArea,
                 'coverAreas' => $this->coverAreas,
                 'allowedAspectRatios' => $this->allowedAspectRatios,
                 'selectedRatio' => $this->selectedRatio,
             ],
         ];
-
-        // focus area and cover areas are optional. Their key must not be added to the
-        // crop variant, if they have not been configured in CropVariants.yaml
-        if ($this->focusArea) {
-            $cropVariant[$this->name]['focusArea'] = $this->focusArea;
-        }
-
-        return $cropVariant;
     }
 
     /**

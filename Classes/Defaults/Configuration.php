@@ -62,22 +62,22 @@ class Configuration
         }
 
         // Check if requested key is set in the configuration
-        // focus area and cover area are optional.
-        if ($key !== 'focusAreas' && $key !== 'coverAreas' && !isset($defaults[$key])) {
+        if (!isset($defaults[trim($key)])) {
             throw new \UnexpectedValueException(
                 'Requested key was not found. Is something missing in your configuration file? (Please take a look at ' . self::CONFIGFILE . ')',
                 1524835641
             );
         }
 
-        if ($key !== 'focusAreas' && $key !== 'coverAreas' && empty($defaults[$key])) {
+        // Check if requested key is set in the configuration
+        if (empty($defaults[trim($key)])) {
             throw new \UnexpectedValueException(
                 'Requested key doesn\'t contain any children.  (Please take a look at ' . self::CONFIGFILE . ')',
                 1524835441
             );
         }
 
-        return $defaults[$key] ?? [];
+        return $defaults[trim($key)];
     }
 
     public static function loadYamlFile(string $path): ?array

@@ -106,6 +106,10 @@ class Builder
                 );
             }
 
+            // $item might comprise arrays of coverAreas and focusArea, too. Those arrays must not be assigned
+            // to the cropVariants, otherwise the crop functionality won't work at all.
+            unset($item['coverAreas'], $item['focusArea']);
+
             $this->cropVariants[$key] = $item;
         }
 
