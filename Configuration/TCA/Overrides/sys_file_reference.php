@@ -30,9 +30,6 @@ call_user_func(
             foreach ($defaults as $key => $config) {
                 $defaultCrop = $defaultCrop->addCropVariant(
                     CropVariant::create($key)
-                        ->setCropArea(CropArea::get($key))
-                        ->setFocusArea(FocusArea::get($key))
-                        ->addCoverAreas(CoverArea::get([$key]))
                         ->addAllowedAspectRatios(AspectRatio::get($config['aspectRatios']))
                         ->get()
                 );
