@@ -17,7 +17,12 @@ class Configuration
      */
     public const CONFIGFILE = '/Configuration/ImageManipulation/CropVariants.yaml';
 
-    protected const CACHE_IDENTIFIER = 'cropvariants_configuration';
+    /**
+     * Static runtime cache for yaml file content
+     *
+     * @var null
+     */
+    private static $cache =  null;
 
     /**
      * Returns the processed configuration array from the YAML configuration file
@@ -30,7 +35,8 @@ class Configuration
         // Initiate Classes
         $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
 
-        if (($configuration = static::getCache()->get(static::CACHE_IDENTIFIER)) === false) {
+        // If cache is empty load configuration from yaml file
+        if (($configuration = self::$cache) === null) {
             // Get extension name and path from where the custom CropVariants.yaml file should be loaded
             $configFilePath = self::getActiveConfigurationFilePath();
 
@@ -45,8 +51,10 @@ class Configuration
             if (!isset($configuration)) {
                 $configuration = self::loadYamlFile('EXT:cropvariantsbuilder' . self::CONFIGFILE);
             }
-            static::getCache()->set(static::CACHE_IDENTIFIER, $configuration);
+            // Write configuration to cache
+            static::$cache = $configuration;
         }
+
         $defaults = $configuration['imageManipulation']['cropVariants']['defaults'];
         // Check if configuration array path exists
         if (!\is_array($defaults)) {
@@ -94,13 +102,8 @@ class Configuration
     public static function getActiveConfigurationFilePath(): string
     {
         $configurationProviderExtension = GeneralUtility::makeInstance(EmConfiguration::class)
-            ->getConfigurationProviderExtension();
+                                                        ->getConfigurationProviderExtension();
 
         return 'EXT:' . $configurationProviderExtension . self::CONFIGFILE;
-    }
-
-    protected static function getCache(): FrontendInterface
-    {
-        return GeneralUtility::makeInstance(CacheManager::class)->getCache('runtime');
     }
 }
