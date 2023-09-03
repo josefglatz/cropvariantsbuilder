@@ -5,12 +5,12 @@ $EM_CONF[$_EXTKEY] = [
     'version' => '1.0.3',
     'state' => 'stable',
     'author' => 'Josef Glatz',
-    'author_email' => 'josefglatz@gmailcom',
+    'author_email' => 'typo3@josefglatz.at',
     'clearCacheOnLoad' => true,
     'category' => 'be',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.4.13-12.0.0'
+            'typo3' => '11.5.0-12.4.99'
         ],
         'conflicts' => [],
         'suggests' => [],
