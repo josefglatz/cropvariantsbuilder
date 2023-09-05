@@ -102,6 +102,15 @@ Download and install the extension with the TYPO3 CMS extension manager
 module or directly via
 [typo3.org](https://typo3.org/extensions/repository/view/cropvariantsbuilder).
 
+### Version Matrix
+
+| TYPO3 version | Extension version | notes                              |
+|---------------|-------------------|------------------------------------|
+| 8.7-10.4      | `1.0.1`           | no breaking changes                |
+| 10.4-11.5     | `1.0.3`           | no breaking changes                |
+| 11.5-12.4     | `2.0.0`           | translation fallback logic removed |
+
+
 ---
 
 ## Development
