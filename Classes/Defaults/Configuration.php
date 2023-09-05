@@ -3,7 +3,6 @@
 namespace JosefGlatz\CropVariantsBuilder\Defaults;
 
 use JosefGlatz\CropVariantsBuilder\Domain\Model\Dto\EmConfiguration;
-use JosefGlatz\CropVariantsBuilder\Service\VersionService;
 use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -90,11 +89,7 @@ class Configuration
     {
         $fileLoader = GeneralUtility::makeInstance(YamlFileLoader::class);
 
-        if (VersionService::isVersion8()) {
-            return $fileLoader->load($path);
-        } else {
-            return $fileLoader->load($path, YamlFileLoader::PROCESS_IMPORTS);
-        }
+        return $fileLoader->load($path, YamlFileLoader::PROCESS_IMPORTS);
     }
 
     public static function getActiveConfigurationFilePath(): string
