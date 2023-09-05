@@ -14,6 +14,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CropVariant
 {
+    protected EmConfiguration $emConf;
+
     protected const LLPATH = 'LLL:EXT:%s/Resources/Private/Language/%s.xlf:';
     protected const LLPATHPREFIX = 'crop_variants.';
     protected const LLPATHSUFFIX = '.label';
@@ -70,7 +72,7 @@ class CropVariant
     /**
      * CropVariant constructor.
      *  - set provided name
-     *  - try to set title based on LLL strings (per convention)
+     *  - set title (LLL string based on configuration)
      *  - set default cropArea
      *
      * @param string $name name of this cropVariant
@@ -78,7 +80,8 @@ class CropVariant
      */
     public function __construct(string $name)
     {
-        $this->name = $name;
+        $this->emConf = GeneralUtility::makeInstance(EmConfiguration::class);
+        $this->name = trim($name);
         $this->setDefaultTitle();
         $this->cropArea = CropArea::get();
     }
@@ -97,6 +100,10 @@ class CropVariant
 
     /**
      * Set title
+     *
+     * Use it only if you don't want to use
+     * xlf files for translating or if you
+     * want to add custom LLL strings.
      *
      * @param string $title
      * @return $this
@@ -295,10 +302,12 @@ class CropVariant
     }
 
     /**
-     * Try to set the title
+     * Set the default title
      *
-     *  - a) ...based on per convention defined localized strings in specific xlf file(s)
-     *  - b) by value of $this->name as a fallback
+     *  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     *  !!! There is no fallback or magic LLL fallback since version 2.0 !!!
+     *  !!! due to upstream changes in the TYPO3 core.                   !!!
+     *  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      *
      * @throws \InvalidArgumentException
      */
@@ -306,72 +315,51 @@ class CropVariant
     {
         $title = '';
         if ($this->name !== '') {
-            // Try a) if name has no space character
-            if (!strrpos($this->name, ' ')) {
-                $title = $this->defaultLocalizationAttempt($this->name);
-            }
-            // Try b)
-            if ($title === '') {
-                $title = str_replace('_', ' ', $this->name);
-            }
+            $title = $this->setLllString($this->name);
             $this->title = $title;
         }
     }
 
     /**
-     * Translation attempt
+     * Generate a LLL string for this cropVariant
      *
-     *  based on label convention key `crop_variants.$key.label`
-     *      1. in EXT:cropvariantsbuilder
-     *      2. in EXT:<configuredConfigurationProviderExtension>
+     * Based on the extension configuration
+     *   by using the shipped locallang.xlf or by
+     *   using a custom xlf file in another
+     *   extension (e.g. sitepackage ext)
      *
-     * @param string $key
-     * @return string 'LLL:...' string or empty string if localization wasn't successful
-     * @throws \InvalidArgumentException
+     * @param string $name
+     * @return string
      */
-    protected function defaultLocalizationAttempt(string $key): string
+    protected function setLllString(string $name): string
     {
-        $result = '';
-        $emConf = GeneralUtility::makeInstance(EmConfiguration::class);
-        $defaultLllKeyToCheck = sprintf(self::LLPATH, 'cropvariantsbuilder',
-                'locallang') . self::LLPATHPREFIX . trim(htmlspecialchars($key)) . self::LLPATHSUFFIX;
-        $configurationProviderLllKeyToCheck = sprintf(self::LLPATH, $emConf->getConfigurationProviderExtension(),
-                $emConf->getConfigurationProviderLocallangFilename()) . self::LLPATHPREFIX . trim(htmlspecialchars($key)) . self::LLPATHSUFFIX;
+        if ($this->validateConfigurationProviderSettings()) {
 
-        // check translation in EXT:cropvariantsbuilder
-        if (!empty($this->getLanguageService()->sL($defaultLllKeyToCheck))) {
-            $result = $defaultLllKeyToCheck;
-        }
-        // check translation in given configuration provider extension
-        if (!empty($emConf->getConfigurationProviderExtension())
-            && !empty($emConf->getConfigurationProviderLocallangFilename())
-            && !empty($this->getLanguageService()->sL($configurationProviderLllKeyToCheck))) {
-            $result = $configurationProviderLllKeyToCheck;
+            return sprintf(self::LLPATH, $this->emConf->getConfigurationProviderExtension(),
+                    $this->emConf->getConfigurationProviderLocallangFilename()) . self::LLPATHPREFIX . trim(htmlspecialchars($name)) . self::LLPATHSUFFIX;
         }
 
-        return $result;
+        return sprintf(self::LLPATH, 'cropvariantsbuilder',
+                'locallang') . self::LLPATHPREFIX . trim(htmlspecialchars($name)) . self::LLPATHSUFFIX;
     }
 
     /**
-     * Returns LanguageService
+     * Check for necessary configuration
      *
-     * @return LanguageService
+     * @return bool
      */
-    protected function getLanguageService(): LanguageService
+    protected function validateConfigurationProviderSettings(): bool
     {
-        $languageServiceFactory = GeneralUtility::makeInstance(LanguageServiceFactory::class);
-        $beUser = $GLOBALS['BE_USER'] ?? null;
+        $configurationProvider['extension'] = $this->emConf->getConfigurationProviderExtension();
+        $configurationProvider['locallangFilename'] = $this->emConf->getConfigurationProviderLocallangFilename();
 
-        if ($beUser instanceof AbstractUserAuthentication) {
-            return $languageServiceFactory->createFromUserPreferences($beUser);
+        if (
+            empty($configurationProvider['extension'])
+            || empty($configurationProvider['locallangFilename'])
+        ) {
+            return false;
         }
 
-        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
-
-        if ($request instanceof ServerRequestInterface && $request->getAttribute('language') instanceof SiteLanguage) {
-            return $languageServiceFactory->createFromSiteLanguage($request->getAttribute('language'));
-        }
-
-        return $languageServiceFactory->create('default');
+        return true;
     }
 }

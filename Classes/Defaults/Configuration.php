@@ -4,8 +4,6 @@ namespace JosefGlatz\CropVariantsBuilder\Defaults;
 
 use JosefGlatz\CropVariantsBuilder\Domain\Model\Dto\EmConfiguration;
 use JosefGlatz\CropVariantsBuilder\Service\VersionService;
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
