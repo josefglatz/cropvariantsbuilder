@@ -11,30 +11,45 @@ parameter is used as the cropVariant name.
 The given name is also used to retrieve a meaningful label (and
 translation) for the TYPO3 backend automatically.
 
-We use the cropVariant name `md` in the following example.
+We use the cropVariant name `md` in the following example
+(`\JosefGlatz\CropVariantsBuilder\CropVariant::create('md')`).
 
-## 1. An existing label is searched for in the extension
+Either the supplied XLF file is used or the XLF file in the configured extension
+is used depending on your extension configuration settings of
+ext:cropvariantsbuilder.
+
+## If you set the proper extension configuration
+
+A label
+`LLL:EXT:yourconfiguredExtensionName/Resources/Private/Language/locallang.xlf:crop_variants.md.label`
+is used as final string.
+
+> Make sure to add the proper translation string to the xlf file!
+
+## If you do not set the proper extension configuration
 
 A label
 `LLL:EXT:cropvariantsbuilder/Resources/Private/Language/locallang.xlf:crop_variants.md.label`
-is being tested.
+is used as final string.
 
 > This returns the label "_Medium (md) &#8673;_". This extension ships a
 > label for that.
 
-## 2. An existing label is search for in your configured provider extension (it checks whether the default translate has been overwritten in your configured configuration provider extension)
+As you can see, everytime you can not rely on the shipped translation strings
+of ext:cropvariants!
 
-A label
-`LLL:EXT:my_nice_site_extension/Resources/Private/Language/locallang.xlf:crop_variants.md.label`
-is being tested.
-[Your extension and xlf file name can be configured](../../../README.md#configuration).
+## Overwrite label with a custom content
 
-> In this example the label isn't set in the configuration provider
-> extension. As a result, the standard translation of
-> `ext:cropvariantsbuilder` is used.
+If you do not want to use XLF files for translating labels at all or you want
+to set a custom `LLL:EXT:whateverforthislabel/...` label then you can use the
+method `setTitle()` of the CropVariant class.
+
 
 ---
 
 # Available defaults
 
-Please see [shipped locallang.xlf](../../../Resources/Private/Language/locallang.xlf) for details. If you need more common labels, please provide a [pull request](https://github.com/josefglatz/cropvariantsbuilder/pulls) or [create an issue](https://github.com/josefglatz/cropvariantsbuilder/issues/new)!
+Please see
+[shipped locallang.xlf](../../../Resources/Private/Language/locallang.xlf) for
+details. If you need more common labels, please provide a [pull request](https://github.com/josefglatz/cropvariantsbuilder/pulls) or
+[create an issue](https://github.com/josefglatz/cropvariantsbuilder/issues/new)!
