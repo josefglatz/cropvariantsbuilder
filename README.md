@@ -3,11 +3,9 @@
 > TYPO3 extension to simplify writing cropVariants for TYPO3
 > Integrators/Developers
 
-> The inital extraction of the functionality from
-> `josefglatz/TYPO3-Distribution` into its own extension was supported
-> by [supseven](https://www.supseven.at/).
-
 ---
+<details>
+    <summary>→ → → Table of Contents</summary>
 
 1. → [About](#about)
    1. [Past](#past)
@@ -33,6 +31,7 @@
    4. [Translation logic for cropVariant label](Resources/LegacyDocumentation/Markdown/Images/TranslationLogic.md)
 
 ---
+</details>
 
 ## About
 
@@ -103,6 +102,18 @@ Download and install the extension with the TYPO3 CMS extension manager
 module or directly via
 [typo3.org](https://typo3.org/extensions/repository/view/cropvariantsbuilder).
 
+---
+
+## Development
+
+> The ongoing development is done within the main branch!
+
+You can use `composer require
+josefglatz/cropvariantsbuilder:dev-main` if you want to test the
+current development state.
+
+---
+
 ## Configuration
 
 ### Name of the extension where the general configuration file lives
@@ -131,16 +142,17 @@ configurationProviderLocallangFilename = locallang
 The following example shows the resulting PHP configuration part:
 
 ```php
-$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cropvariantsbuilder'] = serialize([
-    'configurationProviderExtension' => 'my_nice_site_extension',
-    'configurationProviderLocallangFilename' => 'locallang',
-]);
-
 // TYPO3 >= 9.5 LTS:
 $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['cropvariantsbuilder'] = [
     'configurationProviderExtension' => 'my_nice_site_extension',
     'configurationProviderLocallangFilename' => 'locallang',
 ];
+
+// TYPO3 =< 8.7 LTS
+$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cropvariantsbuilder'] = serialize([
+    'configurationProviderExtension' => 'my_nice_site_extension',
+    'configurationProviderLocallangFilename' => 'locallang',
+]);
 ```
 
 ### Example of using your own CropVariants.yaml file
@@ -196,16 +208,6 @@ for every necessary part.
 * [DefaultsAndPresets](Resources/LegacyDocumentation/Markdown/Images/DefaultsAndPresets.md)
 * [CropVariantsBuilder Examples](Resources/LegacyDocumentation/Markdown/Images/CropVariantsBuilder.md)
 * [Translation logic for cropVariant label](Resources/LegacyDocumentation/Markdown/Images/TranslationLogic.md)
-
----
-
-## Development
-
-> The ongoing development is done within the master branch!
-
-You can use `composer require
-josefglatz/cropvariantsbuilder:dev-master` if you want to test the
-current development state.
 
 
 ---

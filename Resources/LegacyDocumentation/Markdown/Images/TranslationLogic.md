@@ -50,6 +50,6 @@ method `setTitle()` of the CropVariant class.
 # Available defaults
 
 Please see
-[shipped locallang.xlf](../../../Resources/Private/Language/locallang.xlf) for
+[shipped locallang.xlf](/Resources/Private/Language/locallang.xlf) for
 details. If you need more common labels, please provide a [pull request](https://github.com/josefglatz/cropvariantsbuilder/pulls) or
 [create an issue](https://github.com/josefglatz/cropvariantsbuilder/issues/new)!
