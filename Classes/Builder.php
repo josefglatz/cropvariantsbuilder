@@ -175,7 +175,7 @@ class Builder
      * @return self
      * @throws \Exception
      */
-    public function persistToTca(bool $force = false, int $customChildType = null, string $imageManipulationField = self::DEFAULT_IMAGE_MANIPULATION_FIELD): self
+    public function persistToTca(bool $force = false, ?int $customChildType = null, string $imageManipulationField = self::DEFAULT_IMAGE_MANIPULATION_FIELD): self
     {
         if (empty($this->cropVariants)) {
             throw new \RuntimeException(
