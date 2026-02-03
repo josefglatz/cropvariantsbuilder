@@ -8,9 +8,7 @@ class ArrayTool
      * Check for existing keys in an array
      * Example: Checks if all required array keys exists in an array
      *
-     * @param array $requiredKeys
      * @param $arrayToCheck
-     * @return bool
      */
     public static function arrayKeysExists(array $requiredKeys, $arrayToCheck): bool
     {

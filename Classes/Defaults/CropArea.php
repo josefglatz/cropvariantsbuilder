@@ -7,7 +7,6 @@ class CropArea
     /**
      * Retrieve crop area
      *
-     * @param string $name
      * @return array cropArea (default cropArea if no parameter was hand over)
      * @throws \UnexpectedValueException
      */

@@ -7,7 +7,6 @@ class CoverArea
     /**
      * Retrieve cover area presets
      *
-     * @param array $keys
      * @return array all retrieved cover areas
      * @throws \UnexpectedValueException
      */

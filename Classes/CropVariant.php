@@ -5,11 +5,6 @@ namespace JosefGlatz\CropVariantsBuilder;
 use JosefGlatz\CropVariantsBuilder\Defaults\CropArea;
 use JosefGlatz\CropVariantsBuilder\Domain\Model\Dto\EmConfiguration;
 use JosefGlatz\CropVariantsBuilder\Utility\ArrayTool;
-use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Authentication\AbstractUserAuthentication;
-use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CropVariant
@@ -22,10 +17,8 @@ class CropVariant
 
     /**
      * Name (key)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Visible Title (LLL)
@@ -36,10 +29,8 @@ class CropVariant
 
     /**
      * cropArea configuration
-     *
-     * @var array
      */
-    protected $cropArea = [];
+    protected array $cropArea;
 
     /**
      * focusArea configuration
@@ -90,7 +81,6 @@ class CropVariant
      * Instantiation of class
      *
      * @param string $name name/key for this cropVariant
-     * @return self
      * @throws \InvalidArgumentException
      */
     public static function create(string $name): self
@@ -105,7 +95,6 @@ class CropVariant
      * xlf files for translating or if you
      * want to add custom LLL strings.
      *
-     * @param string $title
      * @return $this
      */
     public function setTitle(string $title): self
@@ -118,7 +107,6 @@ class CropVariant
     /**
      * Set cropArea
      *
-     * @param array $cropArea
      * @return $this
      */
     public function setCropArea(array $cropArea): self
@@ -131,13 +119,12 @@ class CropVariant
     /**
      * Set focusArea
      *
-     * @param array $focusArea
      * @return $this
      * @throws \UnexpectedValueException
      */
     public function setFocusArea(array $focusArea): self
     {
-        if (!empty($focusArea) && !ArrayTool::arrayKeysExists(['x', 'y', 'width', 'height'], $focusArea)) {
+        if ($focusArea !== [] && !ArrayTool::arrayKeysExists(['x', 'y', 'width', 'height'], $focusArea)) {
             throw new \UnexpectedValueException(
                 'focusArea array for cropVariant "' . $this->name . '" does not have set all necessary keys set.',
                 1520894420
@@ -151,7 +138,6 @@ class CropVariant
     /**
      * Add coverAreas
      *
-     * @param array $coverAreas
      * @return $this
      */
     public function addCoverAreas(array $coverAreas): self
@@ -166,24 +152,21 @@ class CropVariant
     /**
      * Add allowedAspectRatio(s)
      *
-     * @param array $ratios
      * @return $this
      * @throws \RuntimeException
      */
     public function addAllowedAspectRatios(array $ratios): self
     {
-        if (!empty($ratios)) {
-            foreach ($ratios as $key => $ratio) {
-                // Check wether aspectRatio with same name ($key) is already set
-                if (\array_key_exists($key, $this->allowedAspectRatios)) {
-                    throw new \RuntimeException(
-                        'allowedAspectRatio "' . $ratio . '" already exists in the configuration.
+        foreach ($ratios as $key => $ratio) {
+            // Check wether aspectRatio with same name ($key) is already set
+            if (\array_key_exists($key, $this->allowedAspectRatios)) {
+                throw new \RuntimeException(
+                    'allowedAspectRatio "' . $ratio . '" already exists in the configuration.
                         Please remove it with removeAllowedAspectRatio() before adding new with same name.',
-                        1520891285
-                    );
-                }
-                $this->allowedAspectRatios[$key] = $ratio;
+                    1520891285
+                );
             }
+            $this->allowedAspectRatios[$key] = $ratio;
         }
         $this->allowedAspectRatios = $ratios;
 
@@ -215,7 +198,6 @@ class CropVariant
     /**
      * Set selectedRatio for cropVariant (optional)
      *
-     * @param string $ratio
      * @return $this
      * @throws \UnexpectedValueException
      */
@@ -240,7 +222,6 @@ class CropVariant
      * @TODO: Only return non emtpy sub-arrays
      * @TODO: Reduce checks by moving them to their classes (still needs introduced)
      *
-     * @return array
      * @throws \UnexpectedValueException
      */
     public function get(): array
@@ -253,7 +234,7 @@ class CropVariant
             );
         }
         // Check if necessary keys are set
-        if (empty($this->cropArea)) {
+        if ($this->cropArea === []) {
             throw new \UnexpectedValueException(
                 'cropArea array for cropVariant "' . $this->name . '" not set.',
                 1520731402
@@ -265,21 +246,19 @@ class CropVariant
                 1520732819
             );
         }
-        if (!empty($this->focusArea) && !ArrayTool::arrayKeysExists(['x', 'y', 'width', 'height'], $this->focusArea)) {
+        if ($this->focusArea !== [] && !ArrayTool::arrayKeysExists(['x', 'y', 'width', 'height'], $this->focusArea)) {
             throw new \UnexpectedValueException(
                 'focusArea array for cropVariant "' . $this->name . '" does not have set all necessary keys.',
                 1520892162
             );
         }
-        if (!empty($this->coverAreas)) {
-            foreach ($this->coverAreas as $coverArea) {
-                if (!ArrayTool::arrayKeysExists(['x', 'y', 'width', 'height'], $coverArea)) {
-                    throw new \UnexpectedValueException(
-                        'coverAreas array for cropVariant "' . $this->name . '" are not configured correctly. \
+        foreach ($this->coverAreas as $coverArea) {
+            if (!ArrayTool::arrayKeysExists(['x', 'y', 'width', 'height'], $coverArea)) {
+                throw new \UnexpectedValueException(
+                    'coverAreas array for cropVariant "' . $this->name . '" are not configured correctly. \
                         Not every coverArea is configured correctly.',
-                        1520733632
-                    );
-                }
+                    1520733632
+                );
             }
         }
         if (empty($this->allowedAspectRatios)) {
@@ -327,9 +306,6 @@ class CropVariant
      *   by using the shipped locallang.xlf or by
      *   using a custom xlf file in another
      *   extension (e.g. sitepackage ext)
-     *
-     * @param string $name
-     * @return string
      */
     protected function setLllString(string $name): string
     {
@@ -345,21 +321,11 @@ class CropVariant
 
     /**
      * Check for necessary configuration
-     *
-     * @return bool
      */
     protected function validateConfigurationProviderSettings(): bool
     {
         $configurationProvider['extension'] = $this->emConf->getConfigurationProviderExtension();
         $configurationProvider['locallangFilename'] = $this->emConf->getConfigurationProviderLocallangFilename();
-
-        if (
-            empty($configurationProvider['extension'])
-            || empty($configurationProvider['locallangFilename'])
-        ) {
-            return false;
-        }
-
-        return true;
+        return isset($configurationProvider['extension']) && ($configurationProvider['extension'] !== '' && $configurationProvider['extension'] !== '0') && (isset($configurationProvider['locallangFilename']) && ($configurationProvider['locallangFilename'] !== '' && $configurationProvider['locallangFilename'] !== '0'));
     }
 }

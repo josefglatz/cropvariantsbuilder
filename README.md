@@ -102,6 +102,7 @@ module or directly via
 | 10.4-11.5     | `1.0.3`           | no breaking changes                |
 | 11.5-12.4     | `>=2.0.0`         | translation fallback logic removed |
 | 13.4          | `>=2.0.1`         | no breaking changes since 2.0.0    |
+| 14.1          | `>=3.0.1`         | no breaking changes since 2.0.0    |
 
 ---
 
