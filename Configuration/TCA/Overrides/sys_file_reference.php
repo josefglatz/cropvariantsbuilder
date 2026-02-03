@@ -7,7 +7,7 @@ use JosefGlatz\CropVariantsBuilder\Defaults\AspectRatio;
 use JosefGlatz\CropVariantsBuilder\Defaults\Configuration;
 
 call_user_func(
-    static function ($extKey, $table) {
+    static function ($extKey, string $table): void {
 
         // Default cropVariants configuration is automatically generated from the selected YAML configuration file
         $defaults = Configuration::defaultConfiguration('defaultCropVariantsConfiguration');
@@ -22,7 +22,7 @@ call_user_func(
 
         // Overwrite the TYPO3 core default cropVariant configuration
         // if the necessary configuration has at least one aspect ratio specified
-        if (!empty($defaults)) {
+        if ($defaults !== []) {
             $defaultCrop = Builder::getInstance($table, 'crop');
             foreach ($defaults as $key => $config) {
                 $defaultCrop = $defaultCrop->addCropVariant(

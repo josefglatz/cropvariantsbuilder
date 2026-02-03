@@ -9,7 +9,6 @@ class AspectRatio
     /**
      * Retrieve aspect ratios
      *
-     * @param array $keys
      * @return array desired aspect ratios
      * @throws \UnexpectedValueException
      */
@@ -43,8 +42,6 @@ class AspectRatio
      * - "0.45"
      * - "1"
      *
-     * @param string $value
-     * @return float
      * @throws \UnexpectedValueException
      */
     private static function ratioCalculations(string $value): float

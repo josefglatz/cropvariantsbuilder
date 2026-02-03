@@ -16,21 +16,18 @@ class Configuration
 
     /**
      * Static runtime cache for yaml file content
-     *
-     * @var null
      */
-    private static $cache =  null;
+    private static ?array $cache =  null;
 
     /**
      * Returns the processed configuration array from the YAML configuration file
      *
      * @param string $key specific configuration key
-     * @return array
      */
     public static function defaultConfiguration(string $key = ''): array
     {
         // Initiate Classes
-        $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
+        $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(self::class);
 
         // If cache is empty load configuration from yaml file
         if (($configuration = self::$cache) === null) {
@@ -41,15 +38,17 @@ class Configuration
             try {
                 $configuration = self::loadYamlFile($configFilePath);
             } catch (\UnexpectedValueException $e) {
+                // @extensionScannerIgnoreLine
                 $logger->error(sprintf('The CONFIGFILE "%s" could not be parsed.', $configFilePath), [$e->getMessage()]);
             } catch (\RuntimeException $e) {
+                // @extensionScannerIgnoreLine
                 $logger->error(sprintf('The CONFIGFILE "%s" could not be found.', $configFilePath), [$e->getMessage()]);
             }
             if (!isset($configuration)) {
                 $configuration = self::loadYamlFile('EXT:cropvariantsbuilder' . self::CONFIGFILE);
             }
             // Write configuration to cache
-            static::$cache = $configuration;
+            self::$cache = $configuration;
         }
 
         $defaults = $configuration['imageManipulation']['cropVariants']['defaults'];
@@ -62,7 +61,7 @@ class Configuration
         }
 
         // Return the whole default configuration if key argument is empty
-        if (empty($key)) {
+        if ($key === '' || $key === '0') {
             return $defaults;
         }
 

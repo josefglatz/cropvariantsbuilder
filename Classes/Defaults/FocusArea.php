@@ -7,7 +7,6 @@ class FocusArea
     /**
      * Retrieve focus area
      *
-     * @param string $name
      * @return array focusArea (no default is returned as there is no focusArea necessary)
      * @throws \UnexpectedValueException
      */
