@@ -21,7 +21,7 @@ ext:cropvariantsbuilder.
 ## If you set the proper extension configuration
 
 A label
-`LLL:EXT:yourconfiguredExtensionName/Resources/Private/Language/locallang.xlf:crop_variants.md.label`
+`yourconfiguredExtensionName.messages:crop_variants.md.label`
 is used as final string.
 
 > Make sure to add the proper translation string to the xlf file!
@@ -29,7 +29,7 @@ is used as final string.
 ## If you do not set the proper extension configuration
 
 A label
-`LLL:EXT:cropvariantsbuilder/Resources/Private/Language/locallang.xlf:crop_variants.md.label`
+`cropvariantsbuilder.messages:crop_variants.md.label`
 is used as final string.
 
 > This returns the label "_Medium (md) &#8673;_". This extension ships a
@@ -41,7 +41,7 @@ of ext:cropvariants!
 ## Overwrite label with a custom content
 
 If you do not want to use XLF files for translating labels at all or you want
-to set a custom `LLL:EXT:whateverforthislabel/...` label then you can use the
+to set a custom `whateverforthislabel...` label then you can use the
 method `setTitle()` of the CropVariant class.
 
 

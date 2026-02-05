@@ -54,7 +54,7 @@ defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table) {
-        $languageFileBePrefix = 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_be.xlf:';
+        $languageFileBePrefix = $extKey . '.be:';
 
         $tca = [
             'columns' => [
@@ -72,7 +72,7 @@ call_user_func(
                                 ],
                                 'allowedAspectRatios' => [
                                     '3:2' => [
-                                        'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.3_2',
+                                        'title' => 'core.wizards:imwizard.ratio.3_2',
                                         'value' => 3 / 2
                                     ],
                                     '2:3' => [
@@ -80,7 +80,7 @@ call_user_func(
                                         'value' => 2 / 3
                                     ],
                                     '4:3' => [
-                                        'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.4_3',
+                                        'title' => 'core.wizards:imwizard.ratio.4_3',
                                         'value' => 4 / 3
                                     ],
                                     '3:4' => [
@@ -88,11 +88,11 @@ call_user_func(
                                         'value' => 3 / 4
                                     ],
                                     '1:1' => [
-                                        'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.1_1',
+                                        'title' => 'core.wizards:imwizard.ratio.1_1',
                                         'value' => 1.0
                                     ],
                                     'NaN' => [
-                                        'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
+                                        'title' => 'core.wizards:imwizard.ratio.free',
                                         'value' => 0.0
                                     ],
                                 ],
@@ -169,7 +169,7 @@ defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table) {
-        $languageFileBePrefix = 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_BackendGeneral.xlf:';
+        $languageFileBePrefix = $extKey . '.backend_general:';
 
         $additionalColumns = [
             'tx_my_nice_site_extension_nav_image' => [
@@ -204,7 +204,7 @@ call_user_func(
                                             ],
                                             'allowedAspectRatios' => [
                                                 '4:3' => [
-                                                    'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.4_3',
+                                                    'title' => 'core.wizards:imwizard.ratio.4_3',
                                                     'value' => 4 / 3
                                                 ],
                                             ],
@@ -220,7 +220,7 @@ call_user_func(
                                             ],
                                             'allowedAspectRatios' => [
                                                 '4:3' => [
-                                                    'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.4_3',
+                                                    'title' => 'core.wizards:imwizard.ratio.4_3',
                                                     'value' => 4 / 3
                                                 ],
                                             ],
@@ -236,7 +236,7 @@ call_user_func(
                                             ],
                                             'allowedAspectRatios' => [
                                                 '4:3' => [
-                                                    'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.4_3',
+                                                    'title' => 'core.wizards:imwizard.ratio.4_3',
                                                     'value' => 4 / 3
                                                 ],
                                             ],
@@ -279,7 +279,7 @@ defined('TYPO3') || die('Access denied.');
 
 call_user_func(
     static function ($extKey, $table) {
-        $languageFileBePrefix = 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_BackendGeneral.xlf:';
+        $languageFileBePrefix = $extKey . '.backend_general:';
 
         $additionalColumns = [
             'tx_my_nice_site_extension_nav_image' => [

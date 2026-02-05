@@ -324,8 +324,8 @@ class CropVariant
      */
     protected function validateConfigurationProviderSettings(): bool
     {
-        $configurationProvider['extension'] = $this->emConf->getConfigurationProviderExtension();
-        $configurationProvider['locallangFilename'] = $this->emConf->getConfigurationProviderLocallangFilename();
-        return isset($configurationProvider['extension']) && ($configurationProvider['extension'] !== '' && $configurationProvider['extension'] !== '0') && (isset($configurationProvider['locallangFilename']) && ($configurationProvider['locallangFilename'] !== '' && $configurationProvider['locallangFilename'] !== '0'));
+        $extension = $this->emConf->getConfigurationProviderExtension();
+        $locallangFilename = $this->emConf->getConfigurationProviderLocallangFilename();
+        return $extension !== '' && $extension !== '0' && $locallangFilename !== '' && $locallangFilename !== '0';
     }
 }
