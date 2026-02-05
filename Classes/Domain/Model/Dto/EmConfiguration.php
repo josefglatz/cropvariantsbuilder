@@ -21,7 +21,7 @@ class EmConfiguration implements SingletonInterface
     }
 
     /**
-     * @var string;
+     * @var string
      */
     protected $configurationProviderExtension = '';
 
